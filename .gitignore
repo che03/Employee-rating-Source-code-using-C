@@ -1,52 +1,35 @@
-# Prerequisites
-*.d
+#include <stdio.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+int EmployeRating(int N, int workload[]) { // function to calculate employye rating
+    int currentStreak = 0;  // current streak of the workload 
+    int maxStreak = 0;      //max streak of the workload
 
-# Linker output
-*.ilk
-*.map
-*.exp
+    for (int i = 0; i < N; i++) {    //iterate the workload array
+        if (workload[i] > 6) {
+            currentStreak++;
+            if (currentStreak > maxStreak)
+                maxStreak = currentStreak;
+        } else {
+            currentStreak = 0;   // make the current rate 0 if workload <=6
+        }
+    }
 
-# Precompiled Headers
-*.gch
-*.pch
+    return maxStreak;
+}
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+int main() {
+    int N;
+    printf("Enter the number of working days: ");
+    scanf("%d", &N);
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+    int workload[N];
+    printf("Enter the workload for each day separated by spaces: ");
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &workload[i]);
+    }
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+    printf("Employee rating: %d\n", EmployeRating(N, workload));// call employee rating function
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+    return 0;
+}
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
